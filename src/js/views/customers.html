@@ -1,0 +1,73 @@
+<!--
+ Copyright (c) 2014, 2019, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+ <div class="oj-hybrid-padding">
+    <h1>Image Search</h1>
+    <!-- <div id="div1">
+            
+      <oj-label for="text-input">Color</oj-label>
+      <oj-input-text id="text-input" value="{{value}}"></oj-input-text>
+    
+      <br/>
+      <br/>
+    
+      <span class="oj-label">Current component value is: </span>
+      <span data-bind="text: value"></span>
+      
+    </div> -->
+    <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+                    
+      <div id="form1">
+        <oj-label for="combobox">Search by tag</oj-label>
+        <oj-combobox-many id="combobox" style="max-width:20em" value={{val}}>
+          <oj-bind-for-each data="[[tags]]">
+            <template>
+              <oj-option value="[[$current.data.value]]">
+                  <span>
+                    <oj-bind-text value="[[$current.data.label]]"></oj-bind-text>
+                  </span>
+                </oj-option>
+            </template>
+          </oj-bind-for-each>
+        </oj-combobox-many> 
+        <!-- <div>
+          <br/>
+          <oj-label for="curr-value" class="oj-label">Curr value is: </oj-label>
+          <span id="curr-value">
+            <oj-bind-text value="[[JSON.stringify(val())]]"></oj-bind-text>
+          </span>
+        </div> -->
+        <oj-button id='button1' on-oj-action='[[searchButtonClick]]'>Search</oj-button>
+      </div>
+      <div>
+      <!-- <img src="http://localhost:3000/1.png" alt="Italian Trulli"> -->
+      <oj-bind-for-each data="[[imToDisplay]]">
+        <template>
+          <!-- <span value="[[$current.data.value]]"></span> -->
+          <!-- <span>
+              <oj-bind-text value="[[$current.data.label]]"></oj-bind-text>
+            </span> -->
+          <img :src="[[$current.data]]" height="200" width="200">
+        </template>
+      </oj-bind-for-each>
+      </div>
+  
+      <oj-tag-cloud 
+              id='tagcloud1' 
+              layout='cloud' 
+              data='[[dataProvider]]' 
+              animation-on-display='auto'
+              animation-on-data-change='auto'
+              style='clear:left;max-width:800px;height:300px'>  
+              <template slot="itemTemplate" data-oj-as="item">
+                <oj-tag-cloud-item 
+                  label='[[item.data.id]]'
+                  value='[[item.data.total]]'
+                  short-desc='[[item.data.id + ": " + item.data.total + " images"]]'>
+                </oj-tag-cloud-item>
+              </template>
+            </oj-tag-cloud>
+      
+    </div>
+  </div>
